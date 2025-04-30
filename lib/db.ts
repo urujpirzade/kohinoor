@@ -2,15 +2,18 @@
 
 import { PrismaClient } from '@prisma/client';
 
-const prismaClientSingleton = () => new PrismaClient();
+const globalForPrisma = globalThis as unknown as {
+  prisma?: PrismaClient;
+};
 
 const prisma =
-  process.env.NODE_ENV === 'production'
-    ? prismaClientSingleton()
-    : (globalThis as any).prisma ?? prismaClientSingleton();
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ['error'], // Optional logging
+  });
 
 if (process.env.NODE_ENV !== 'production') {
-  (globalThis as any).prisma = prisma;
+  globalForPrisma.prisma = prisma;
 }
 
 export default prisma;
