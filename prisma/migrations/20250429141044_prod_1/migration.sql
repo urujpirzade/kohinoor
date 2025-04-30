@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Event" ALTER COLUMN "catering" DROP NOT NULL,
+ALTER COLUMN "decoration" DROP NOT NULL,
+ALTER COLUMN "kitchen" DROP NOT NULL,
+ALTER COLUMN "hallHandover" DROP NOT NULL;
