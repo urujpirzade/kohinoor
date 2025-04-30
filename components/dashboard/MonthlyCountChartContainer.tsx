@@ -3,8 +3,8 @@ import prisma from '@/lib/db';
 
 const MonthlyCountChartContainer = async () => {
   const currentYear = new Date().getFullYear();
-  const startDate = new Date(`${currentYear}-01-01T00:00:00.000Z`);
-  const endDate = new Date(`${currentYear}-12-31T23:59:59.999Z`);
+  const startDate = new Date(currentYear, 0, 1, 0, 0, 0);
+const endDate = new Date(currentYear, 11, 31, 23, 59, 59, 999);
 
   const events = await prisma.event.findMany({
     where: {
