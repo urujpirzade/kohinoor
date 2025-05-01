@@ -68,7 +68,7 @@ const FormModal = ({
     };
     const handleUserDelete = async (id: string) => {
       const result = await deleteUser(id);
-      if (result.success) {
+      if (result) {
         toast(`${result.message}`);
         router.refresh();
       }
