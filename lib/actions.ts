@@ -354,6 +354,21 @@ export const updateUser = async (data: SignUpSchema) => {
 
 export const deleteUser = async (id: string) => {
   try {
+     const user = await prisma?.user.findUnique({
+      where: { id },
+    });
+
+    if (user?.role === 'ADMIN') {
+      const count = await prisma?.user.count({
+        where: { role: 'ADMIN' },
+      });
+      if (count === 1)
+        return {
+          success: false,
+          error: true,
+          message: 'Last Admin, Atleast one admin must be present.',
+        };
+    }
     const deleteUser = await prisma?.user.delete({
       where: { id },
     });
