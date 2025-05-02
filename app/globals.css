@@ -288,13 +288,13 @@
 }
 
 .hall-exhibition-hall {
-  background-color: #dcfce7 !important; /* Light green */
-  border-left: 3px solid #22c55e !important;
+  background-color: #00dfa2 !important; /* Light green */
+  border-left: 3px solid #ef4444 !important;
 }
 
 .hall-banquet-hall {
-  background-color: #fee2e2 !important; /* Light red */
-  border-left: 3px solid #ef4444 !important;
+  background-color: #ff0060 !important; /* Light red */
+  border-left: 3px solid #00dfa2 !important;
 }
 
 .hall-seminar-room {
