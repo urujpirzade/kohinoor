@@ -30,12 +30,15 @@ const BigCalendarContainer = async () => {
           0
         )
       );
-      ele.start_time = '19:00';
-      ele.end_time = '23:00';
-      additionalEvents.push({
+      const additional = {
         ...ele,
         date: previousDateUTC,
         hall: 'secondHall',
+      };
+      additionalEvents.push({
+        ...additional,
+        start_time: '19:00',
+        end_time: '23:00',
       });
     }
   }
