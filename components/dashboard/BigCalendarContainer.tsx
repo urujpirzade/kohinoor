@@ -18,13 +18,17 @@ const BigCalendarContainer = async () => {
       });
 
       // Second additional event (day before)
-      const previousDate = new Date(ele.date);
-       previousDate.setUTCHours(0, 0, 0, 0);
-      previousDate.setUTCDate(previousDate.getUTCDate() - 1);
-      previousDate.setUTCHours(0, 0, 0, 0);
+      const originalDate = new Date(ele.date); // ele.date is in UTC
+      const previousDateUTC = new Date(
+        Date.UTC(
+          originalDate.getUTCFullYear(),
+          originalDate.getUTCMonth(),
+          originalDate.getUTCDate() - 1 // subtract one day in UTC
+        )
+      );
       additionalEvents.push({
         ...ele,
-        date: previousDate,
+        date: previousDateUTC,
         start_time: '19:00',
         end_time: '23:59',
         hall: 'secondHall',
