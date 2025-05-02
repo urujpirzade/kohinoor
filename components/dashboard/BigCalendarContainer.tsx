@@ -8,10 +8,10 @@ const BigCalendarContainer = async () => {
   const additionalEvents = [];
 
   for (const ele of dataRes) {
+     ele.start_time='00:30';
+        ele.end_time='10:30';
     if (ele.hallHandover) {
       // First additional event
-       ele.start_time='00:30';
-        ele.end_time='10:30';
       additionalEvents.push({
         ...ele,
         hall: 'secondHall',
