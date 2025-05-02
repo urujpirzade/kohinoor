@@ -426,15 +426,10 @@ const EventView = () => {
                   <Image
                     src='/logo_water.png'
                     alt='logo'
-                    height={90}
-                    width={250}
+                    height={150}
+                    width={400}
                     className='relative rounded-full pl-2'
                   />
-                </div>
-                <div className='pl-2'>
-                  <p className='text-lg text-black font-medium mt-1'>
-                    Mangal Karyalay & Open Party Hall
-                  </p>
                 </div>
               </div>
 
@@ -442,17 +437,21 @@ const EventView = () => {
               <div className='flex items-end justify-center gap-3'>
                 <div className='hidden md:block h-16 w-px bg-gradient-to-b from-transparent via-black to-transparent'></div>
 
-                <div className='text-right'>
-                  <div className='flex items-center justify-end gap-2 mb-2'>
-                    <span className='text-black text-lg font-semibold'>
-                      Ph: 7588203811
+                <div className=''>
+                  <div className='flex  flex-col '>
+                    <span className='text-black text-lg font-medium'>
+                      Booking: 7559202911
+                    </span>
+
+                    <span className='text-black text-lg font-medium'>
+                      Manager: 7028568682
                     </span>
                   </div>
                   <p className='text-base text-black'>
-                    Bastegav Road, Akkalkot Dist.
+                    Baslegaon Road, Opposite Lokmangal Plots
                   </p>
                   <p className='text-base text-black'>
-                    Solapur, Maharashtra 413216
+                    Akkalkot, district Solapur, Mh 413216
                   </p>
                 </div>
               </div>
@@ -524,13 +523,17 @@ const EventView = () => {
                       src='/pay.png'
                       alt='Payment'
                       width={48}
-                      height={48}
+                      height={32}
                       className='h-14 w-14 print:h-12 print:w-12'
                     />
                   </div>
-                  <span className='text-2xs text-gray-600 mt-1 print:text-3xs'>
-                    Payment
-                  </span>
+                  <Image
+                    src='/upi.png'
+                    alt='Payment'
+                    width={94}
+                    height={32}
+                    className='h-6 w-22'
+                  />
                 </div>
 
                 {/* Google Maps QR */}
@@ -576,9 +579,13 @@ const EventView = () => {
                       className='h-14 w-14 print:h-12 print:w-12'
                     />
                   </div>
-                  <span className='text-2xs text-gray-600 mt-1 print:text-3xs'>
-                    Instagram
-                  </span>
+                  <Image
+                    src='/ig.png'
+                    alt='Instagram'
+                    width={120}
+                    height={32}
+                    className='h-5 w-20 mt-1'
+                  />
                 </div>
 
                 {/* Scube Profile QR */}
