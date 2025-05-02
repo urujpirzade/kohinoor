@@ -24,9 +24,8 @@ const BigCalendarContainer = async () => {
             originalDate.getUTCFullYear(),
           originalDate.getUTCMonth(),
           originalDate.getUTCDate() - 1,
-          0,
-          0,
-          0
+          originalDate.getUTCHours() - 5,
+          originalDate.getUTCMinutes() - 30
         )
       ).toISOString();
 
