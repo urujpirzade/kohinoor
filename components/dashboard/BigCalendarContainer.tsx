@@ -5,25 +5,35 @@ import { convertBigCalendarDate } from '@/lib/validate';
 const BigCalendarContainer = async () => {
   const dataRes = await prisma.event.findMany({});
 
-   dataRes.forEach((ele) => {
+  const additionalEvents = [];
+
+  for (const ele of dataRes) {
     if (ele.hallHandover) {
-      const dataCopy = { ...ele };
-      dataCopy.start_time = '06:00';
-      dataCopy.end_time = '16:00';
-      dataCopy.hall = 'secondHall';
-      dataRes.push(dataCopy);
-      const dataCopy2 = { ...ele };
-      const currentDate = new Date(dataCopy2.date);
-      currentDate.setDate(currentDate.getDate() - 1);
-      dataCopy2.date = currentDate;
-      dataCopy2.hall = 'secondHall';
-      dataCopy2.start_time = '19:00';
-      dataCopy2.end_time = '23:59';
-      dataRes.push(dataCopy2);
+      // First additional event
+      additionalEvents.push({
+        ...ele,
+        start_time: '06:00',
+        end_time: '16:00',
+        hall: 'secondHall',
+      });
+
+      // Second additional event (day before)
+      const previousDate = new Date(ele.date);
+      previousDate.setDate(previousDate.getDate() - 1);
+
+      additionalEvents.push({
+        ...ele,
+        date: previousDate,
+        start_time: '19:00',
+        end_time: '23:59',
+        hall: 'secondHall',
+      });
     }
-  });
-  
-  const schedule = dataRes.map((event: any) => ({
+  }
+
+  const finalData = [...dataRes, ...additionalEvents];
+
+  const schedule = finalData.map((event: any) => ({
     title: event.event_name,
     date: event.date,
     startTime: event.start_time,
