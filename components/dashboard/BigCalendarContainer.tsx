@@ -21,9 +21,12 @@ const BigCalendarContainer = async () => {
       const originalDate = new Date(ele.date);
       const previousDateUTC = new Date(
         Date.UTC(
-          originalDate.getUTCFullYear(),
+            originalDate.getUTCFullYear(),
           originalDate.getUTCMonth(),
-          originalDate.getUTCDate() - 1
+          originalDate.getUTCDate() - 1,
+          0,
+          0,
+          0
         )
       ).toISOString();
 
