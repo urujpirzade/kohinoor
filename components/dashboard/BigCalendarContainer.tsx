@@ -18,7 +18,7 @@ const BigCalendarContainer = async () => {
       });
 
       // Second additional event (day before)
-    const originalDate = new Date(ele.date);
+      const originalDate = new Date(ele.date);
 
       const previousDateUTC = new Date(
         Date.UTC(
@@ -30,13 +30,11 @@ const BigCalendarContainer = async () => {
           0
         )
       );
-      console.log(previousDateUTC);
-
+      ele.start_time = '19:00';
+      ele.end_time = '23:00';
       additionalEvents.push({
         ...ele,
         date: previousDateUTC,
-        start_time: '06:00',
-        end_time: '16:00',
         hall: 'secondHall',
       });
     }
