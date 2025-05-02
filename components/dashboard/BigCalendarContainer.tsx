@@ -21,7 +21,7 @@ const BigCalendarContainer = async () => {
       const previousDate = new Date(ele.date);
        previousDate.setUTCHours(0, 0, 0, 0);
       previousDate.setUTCDate(previousDate.getUTCDate() - 1);
-     
+      previousDate.setUTCHours(0, 0, 0, 0);
       additionalEvents.push({
         ...ele,
         date: previousDate,
