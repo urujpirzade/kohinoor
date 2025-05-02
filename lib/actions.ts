@@ -40,6 +40,18 @@ export const createEvent = async (data: EventSchema) => {
       };
     }
     const balance = validatedData.amount - validatedData.advance;
+
+     const inputDate = new Date(validatedData.date);
+    inputDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (inputDate.getTime() < today.getTime()) {
+      return {
+        success: false,
+        error: true,
+        message: 'Date is invaild, Date cannot be in past.',
+      };
+    }
     const existingEvent = await prisma?.event.findFirst({
       where: {
         AND: [
