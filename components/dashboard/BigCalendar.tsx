@@ -159,9 +159,9 @@ const BigCalendar = ({ data, isLoading = false }: BigCalendarProps) => {
               className={`legend-color ${hall.className.replace('hall-', '')}`}
               style={{
                 backgroundColor: hall.className.includes('exhibition-hall')
-                  ? '#dcfce7'
+                  ? '#00DFA2'
                   : hall.className.includes('banquet-hall')
-                  ? '#fee2e2'
+                  ? '#ff0060'
                   : '#f1f5f9',
               }}
             />
