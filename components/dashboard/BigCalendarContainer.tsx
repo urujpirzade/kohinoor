@@ -19,7 +19,7 @@ const BigCalendarContainer = async () => {
 
       // Second additional event (day before)
       const previousDate = new Date(ele.date);
-      previousDate.setDate(previousDate.getDate() - 1);
+      previousDate.setUTCDate(previousDate.getUTCDate() - 1);
       previousDate.setUTCHours(0, 0, 0, 0);
       additionalEvents.push({
         ...ele,
