@@ -17,28 +17,34 @@ const BigCalendarContainer = async () => {
         hall: 'secondHall',
       });
 
-       // Second additional event (day before)
+      // Second additional event (day before)
       const originalDate = new Date(ele.date);
+
       const previousDateUTC = new Date(
         Date.UTC(
-            originalDate.getUTCFullYear(),
+          originalDate.getUTCFullYear(),
           originalDate.getUTCMonth(),
           originalDate.getUTCDate() - 1,
-          originalDate.getUTCHours() - 5,
-          originalDate.getUTCMinutes() - 30
+          0, // Set time to 00:00:00 UTC explicitly
+          0,
+          0
         )
-      ).toISOString();
+      );
+
+      // --- Change this line ---
+      // Format the Date object as a UTC ISO string before storing/using
+      const previousDateISOString = previousDateUTC.toISOString();
+      // --- End of Change ---
 
       additionalEvents.push({
         ...ele,
-        date: previousDateUTC,
+        date: previousDateISOString, // Use the ISO string here
         start_time: '19:00',
         end_time: '23:59',
         hall: 'secondHall',
       });
     }
   }
-
 
   const finalData = [...dataRes, ...additionalEvents];
 
