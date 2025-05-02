@@ -12,8 +12,8 @@ const BigCalendarContainer = async () => {
       // First additional event
       additionalEvents.push({
         ...ele,
-        start_time: '06:00',
-        end_time: '16:00',
+          start_time: '12:30',
+        end_time: '10:30',
         hall: 'secondHall',
       });
 
