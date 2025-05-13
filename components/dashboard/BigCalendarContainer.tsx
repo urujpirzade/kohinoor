@@ -4,12 +4,27 @@ import { convertBigCalendarDate } from '@/lib/validate';
 
 const BigCalendarContainer = async () => {
   const dataRes = await prisma.event.findMany({});
-
   const additionalEvents = [];
 
+  const toISTTimeString = (date: Date, timeStr: string) => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+
+    // Combine date and time
+    const fullDate = new Date(date);
+    fullDate.setUTCHours(hours, minutes, 0, 0); // assume stored time is UTC
+
+    // Convert to IST time string
+    return fullDate.toLocaleTimeString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
+
   for (const ele of dataRes) {
-    // ele.start_time = '00:30';
-    // ele.end_time = '10:30';
+    ele.start_time = toISTTimeString(new Date(ele.date), ele.start_time);
+    ele.end_time = toISTTimeString(new Date(ele.date), ele.end_time);
     if (ele.hallHandover) {
       // First additional event
       additionalEvents.push({
