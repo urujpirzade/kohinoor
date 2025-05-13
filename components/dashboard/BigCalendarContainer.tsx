@@ -7,18 +7,9 @@ const BigCalendarContainer = async () => {
 
   const additionalEvents = [];
 
-  const toISTTimeString = (dateObj: Date) => {
-    return dateObj.toLocaleTimeString('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    });
-  };
-
   for (const ele of dataRes) {
-    ele.start_time = toISTTimeString(new Date(ele.start_time));
-    ele.end_time = toISTTimeString(new Date(ele.end_time));
+    ele.start_time = '00:30';
+    ele.end_time = '10:30';
     if (ele.hallHandover) {
       // First additional event
       additionalEvents.push({
