@@ -6,20 +6,23 @@ const BigCalendarContainer = async () => {
   const dataRes = await prisma.event.findMany({});
 
   const additionalEvents = [];
-
-  const toISTTimeString = (date: Date, timeStr: string) => {
+  const toCorrectedISTTime = (date: Date, timeStr: string) => {
     const [hours, minutes] = timeStr.split(':').map(Number);
 
-    // Combine date and time assuming IST input
-    const istDate = new Date(date);
-    istDate.setHours(hours, minutes, 0, 0); // local time as-is
+    // Combine with date (as local time)
+    const localDate = new Date(date);
+    localDate.setHours(hours, minutes, 0, 0);
 
-    return istDate.toTimeString().slice(0, 5); // returns "HH:mm"
+    // Subtract 5 hours 30 minutes to get actual UTC time
+    const correctedUTC = new Date(localDate.getTime() - 5.5 * 60 * 60 * 1000);
+
+    // Return in 'HH:mm' format
+    return correctedUTC.toTimeString().slice(0, 5);
   };
 
   for (const ele of dataRes) {
-    ele.start_time = toISTTimeString(new Date(ele.date), ele.start_time);
-    ele.end_time = toISTTimeString(new Date(ele.date), ele.end_time);
+    ele.start_time = toCorrectedISTTime(new Date(ele.date), ele.start_time);
+    ele.end_time = toCorrectedISTTime(new Date(ele.date), ele.end_time);
     if (ele.hallHandover) {
       // First additional event
       additionalEvents.push({
