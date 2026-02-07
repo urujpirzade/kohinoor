@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -22,6 +24,8 @@ interface ReportsPageState {
 }
 
 const ReportsPage = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [state, setState] = useState<ReportsPageState>({
     startDate: '',
     endDate: '',
@@ -29,6 +33,39 @@ const ReportsPage = () => {
     error: null,
     emptyResults: false,
   });
+
+  // Check if user has permission to access this page
+  useEffect(() => {
+    if (status === 'loading') return; // Wait for session to load
+
+    if (!session) {
+      router.push('/login');
+      return;
+    }
+
+    const userRole = session.user?.role;
+    if (userRole !== 'ROOT' && userRole !== 'ADMIN') {
+      router.push('/dashboard'); // Redirect to dashboard if not authorized
+    }
+  }, [session, status, router]);
+
+  // Show loading state while checking authentication
+  if (status === 'loading') {
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <div className='text-center'>
+          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto'></div>
+          <p className='mt-4 text-gray-600'>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render the page if user is not authorized
+  const userRole = session?.user?.role;
+  if (userRole !== 'ROOT' && userRole !== 'ADMIN') {
+    return null;
+  }
 
   // Date validation - end date must be >= start date
   const isDateRangeValid = () => {

@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_DATABASE_URL")
 }
 
@@ -20,7 +20,7 @@ model User {
   firstName      String
   middleName     String?
   lastName       String
-  contact        String   @unique
+  contact        String    @unique
   hashedPassword String
   image          String?
   role           Role      @default(USER)
@@ -30,28 +30,28 @@ model User {
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
-  client_name String
-  date        DateTime
-  start_time  String
-  end_time    String
-  email       String?
-  contact     String
-  address     String?
-  event_name  String
-  hall        Hall
-  details     String?
-  bookingBy   String?  
-  reference   String?
-  hallHandover  Boolean? @default(false)
-  decoration  Boolean? @default(false)
-  catering    Boolean? @default(false)
-  kitchen     Boolean? @default(false)
-  amount      Int      @default(0)
-  advance     Int      @default(0)
-  balance     Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  client_name  String
+  date         DateTime
+  start_time   String
+  end_time     String
+  email        String?
+  contact      String
+  address      String?
+  event_name   String
+  hall         Hall
+  details      String?
+  bookingBy    String?
+  reference    String?
+  hallHandover Boolean? @default(false)
+  decoration   Boolean? @default(false)
+  catering     Boolean? @default(false)
+  kitchen      Boolean? @default(false)
+  amount       Int      @default(0)
+  advance      Int      @default(0)
+  balance      Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Session {

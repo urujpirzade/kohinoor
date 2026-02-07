@@ -50,18 +50,18 @@ function ModernEventSnapshot({
       <div className='bg-[#f9fafb] border border-[#d1d5db] p-3 rounded-md ml-4 mr-4 print:bg-gray-50 print:border-gray-300 print:p-2 print:ml-0 print:mr-0'>
         <div className='flex justify-between items-start  print:gap-2'>
           <div className='print:w-full'>
-            <h3 className='text-lg font-semibold text-[#1f2937] print:text-base '>
+            <h3 className='text-xl font-semibold text-[#1f2937] print:text-base '>
               {data.event_name || 'Event'}
             </h3>
             <div>
-              <p className='text-2xl font-bold text-purple-700 print:text-xl'>
+              <p className='text-3xl font-bold text-purple-700 print:text-xl'>
                 {eventDate}
               </p>
               <div className='flex items-center gap-2 print:gap-1'>
-                <p className='text-lg text-gray-600 font-medium tracking-wide print:text-sm '>
+                <p className='text-xl text-gray-600 font-medium tracking-wide print:text-sm '>
                   {weekday}:
                 </p>
-                <p className='text-sm text-purple-700 font-medium tracking-wide print:text-xs '>
+                <p className='text-xl text-purple-700 font-medium tracking-wide print:text-sm '>
                   {startTime} to {endTime}
                 </p>
               </div>
@@ -98,8 +98,8 @@ function ModernEventSnapshot({
                 />
               </svg>
             </div>
-            <h3 className='text-lg font-semibold text-indigo-900 print:text-base print:text-black'>
-              <span className='text-base font-medium text-gray-800 print:text-sm'>
+            <h3 className='text-xl font-semibold text-indigo-900 print:text-base print:text-black'>
+              <span className='text-lg font-medium text-gray-800 print:text-sm'>
                 {data.client_name.toUpperCase() || '—'}
               </span>
             </h3>
@@ -108,37 +108,37 @@ function ModernEventSnapshot({
           <div className='grid grid-cols-1 md:grid-cols-2 print:grid-cols-2'>
             <div className='space-y-5 print:space-y-2'>
               <div>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block  print:text-2xs print:mb-0.5'>
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block  print:text-2xs print:mb-0.5'>
                   Contact Number
                 </span>
-                <span className='text-gray-700 print:text-sm'>
+                <span className='text-base text-gray-700 print:text-sm'>
                   {data.contact || '—'}
                 </span>
               </div>
               <div>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block print:text-2xs print:mb-0.5'>
-                  Email Address
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block print:text-2xs print:mb-0.5'>
+                  Reference By
                 </span>
-                <span className='text-gray-700 print:text-sm'>
-                  {data.email || '—'}
+                <span className='text-base text-gray-700 print:text-sm'>
+                  {data.reference || '—'}
                 </span>
               </div>
               <div className='block print:hidden'>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block '>
-                  Reference By
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block '>
+                  Email Address
                 </span>
-                <span className='text-sm text-gray-700 print:text-xs'>
-                  {data.reference || '—'}
+                <span className='text-base text-gray-700 print:text-xs'>
+                  {data.email || '—'}
                 </span>
               </div>
             </div>
 
             <div className='space-y-5 print:space-y-2'>
               <div>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block  print:text-2xs print:mb-0.5'>
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block  print:text-2xs print:mb-0.5'>
                   Booking Date
                 </span>
-                <span className='text-gray-700 print:text-sm'>
+                <span className='text-base text-gray-700 print:text-sm'>
                   {data?.createdAt
                     ? new Date(data.createdAt).toLocaleDateString('en-IN', {
                         day: 'numeric',
@@ -149,18 +149,18 @@ function ModernEventSnapshot({
                 </span>
               </div>
               <div>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block print:text-2xs print:mb-0.5'>
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block print:text-2xs print:mb-0.5'>
                   Address
                 </span>
-                <span className='text-sm text-gray-700 print:text-xs'>
+                <span className='text-base text-gray-700 print:text-xs'>
                   {data.address || '—'}
                 </span>
               </div>
               <div className='block print:hidden'>
-                <span className='text-xs font-semibold text-violet-600 uppercase tracking-wider block '>
+                <span className='text-sm font-semibold text-violet-600 uppercase tracking-wider block '>
                   Booking Taken By
                 </span>
-                <span className='text-sm text-gray-700 print:text-xs'>
+                <span className='text-base text-gray-700 print:text-xs'>
                   {data.bookingBy || '—'}
                 </span>
               </div>
@@ -171,7 +171,7 @@ function ModernEventSnapshot({
         {/* Details Section - Improved with more visual interest */}
         <div className='mt-4'>
           <div className='bg-gradient-to-br from-indigo-50 to-white p-5 rounded-xl border border-gray-100 hover:shadow-md transition-all duration-300 print:bg-gray-50 print:border print:border-gray-200 print:p-3'>
-            <h4 className='text-base font-semibold text-gray-700 mb-2 flex items-center print:text-sm '>
+            <h4 className='text-lg font-semibold text-gray-700 mb-2 flex items-center print:text-sm '>
               <svg
                 className='h-5 w-5 mr-2 text-indigo-600 print:h-4 print:w-4'
                 fill='none'
@@ -187,7 +187,7 @@ function ModernEventSnapshot({
               </svg>
               Services Included
             </h4>
-            <ul className='space-y-2 list-disc list-inside text-gray-700'>
+            <ul className='space-y-2 list-disc list-inside text-base text-gray-700'>
               {data.hallHandover && (
                 <li>
                   Hall No.2 cum dining hall for Engagement/Haldi (1 day before
@@ -218,7 +218,7 @@ function ModernEventSnapshot({
           {/* Progress Bar */}
           <div className='mb-5 print:mb-2'>
             <div className='flex  justify-between items-center mb-1'>
-              <h4 className='text-lg text-emerald-600 font-semibold flex items-center'>
+              <h4 className='text-xl text-emerald-600 font-semibold flex items-center'>
                 <svg
                   className='h-5 w-5 mr-2'
                   fill='none'
@@ -234,7 +234,7 @@ function ModernEventSnapshot({
                 </svg>
                 Payment Details
               </h4>
-              <span className='text-sm font-semibold text-emerald-600'>
+              <span className='text-base font-semibold text-emerald-600'>
                 {percentPaid}% Paid
               </span>
             </div>
@@ -249,31 +249,31 @@ function ModernEventSnapshot({
           {/* Payment Cards */}
           <div className='grid grid-cols-3 gap-3'>
             <div className='bg-gray-50 rounded-lg p-4 border border-gray-100 print:p-2'>
-              <p className='text-xs font-medium text-gray-500 mb-1'>
+              <p className='text-sm font-medium text-gray-500 mb-1'>
                 Total Amount
               </p>
-              <p className='text-lg font-bold text-gray-800 print:text-base'>
+              <p className='text-xl font-bold text-gray-800 print:text-base'>
                 {totalAmount}
               </p>
             </div>
 
             <div className='bg-emerald-50 rounded-lg p-4 border border-emerald-100 print:p-2 print:border-gray-200'>
-              <p className='text-xs font-medium text-emerald-600 mb-1'>
+              <p className='text-sm font-medium text-emerald-600 mb-1'>
                 Amount Paid
               </p>
-              <p className='text-lg font-bold text-emerald-600 print:text-base'>
+              <p className='text-xl font-bold text-emerald-600 print:text-base'>
                 {advancePaid}
               </p>
             </div>
 
             <div className='bg-amber-50 rounded-lg p-4 border border-amber-100 print:p-2 print:border-gray-200'>
-              <p className='text-xs font-medium text-amber-600 mb-1'>
+              <p className='text-sm font-medium text-amber-600 mb-1'>
                 Balance Due
               </p>
-              <p className='text-lg font-bold text-amber-600 print:text-base'>
+              <p className='text-xl font-bold text-amber-600 print:text-base'>
                 {balanceDue}
               </p>
-              <p className='text-xs text-amber-500 mt-1'>Due before event</p>
+              <p className='text-sm text-amber-500 mt-1'>Due before event</p>
             </div>
           </div>
         </div>
@@ -384,10 +384,10 @@ const EventView = () => {
             </svg>
           </div>
           <div className='ml-3'>
-            <h2 className='font-semibold text-gray-800'>
+            <h2 className='text-lg font-semibold text-gray-800'>
               {data.id} : {data.client_name}
             </h2>
-            <p className='text-sm text-gray-500'>Manage booking details</p>
+            <p className='text-base text-gray-500'>Manage booking details</p>
           </div>
         </div>
         <div className='flex space-x-2'>
@@ -450,18 +450,18 @@ const EventView = () => {
 
                 <div className=''>
                   <div className='flex  flex-col '>
-                    <span className='text-black text-lg font-medium'>
+                    <span className='text-black text-xl font-medium'>
                       Booking: 7559202911
                     </span>
 
-                    <span className='text-black text-lg font-medium'>
+                    <span className='text-black text-xl font-medium'>
                       Manager: 7028568682
                     </span>
                   </div>
-                  <p className='text-base text-black'>
+                  <p className='text-lg text-black'>
                     Baslegaon Road, Opposite Lokmangal Plots
                   </p>
-                  <p className='text-base text-black'>
+                  <p className='text-lg text-black'>
                     Akkalkot, district Solapur, Mh 413216
                   </p>
                 </div>
@@ -486,7 +486,7 @@ const EventView = () => {
               >
                 <path d='M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z' />
               </svg>
-              <h2 className='text-2xl font-semibold mx-3 text-amber-800 print:text-xl'>
+              <h2 className='text-3xl font-semibold mx-3 text-amber-800 print:text-xl'>
                 Venue Booking Receipt
               </h2>
               <svg
@@ -616,15 +616,15 @@ const EventView = () => {
                 </div> */}
               </div>
             </div>
-            <div className='text-xs font-semibold text-blue-500'>
-              <span className='text-red-500  text-lg'>*</span> नियम व अटी कृपया
+            <div className='text-sm font-semibold text-blue-500'>
+              <span className='text-red-500  text-xl'>*</span> नियम व अटी कृपया
               पान उलटा.
             </div>
             <div className='text-right'>
               <div className='border-t-2 border-black px-16 py-1 mb-1 print:border-t print:border-gray-600 print:px-12 print:pt-0 print:pb-1'>
                 <span className='block h-6 print:h-4'></span>
               </div>
-              <span className='font-medium text-gray-600 text-sm print:text-xs print:text-black'>
+              <span className='font-medium text-gray-600 text-base print:text-xs print:text-black'>
                 Authorized Signature with Stamp
               </span>
             </div>
@@ -651,84 +651,84 @@ const EventView = () => {
             <div className='p-5'>
               <ol className='space-y-3'>
                 <li className='flex items-baseline'>
-                  <span className='text-md font-semibold text-gray-500 mr-3'>{`0१)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base font-semibold text-gray-500 mr-3'>{`0१)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     बुकींग करताना आधार कार्ड अनिवार्य आहे.
                   </p>
                 </li>
 
                 <li className='flex items-baseline '>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`02)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`02)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     संपुर्ण रक्कम जमा केल्यावर कार्यक्रमासाठी हॉल ताब्यात
                     देण्यात येईल.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0३)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0३)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     हॉल, लॉन व कंपाऊंड मध्ये डॉल्बी, डी. जे. व बॅन्जो लावू दिले
                     जाणार नाही.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0४)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0४)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     मध्यपान व धुम्रपानास सक्त मनाई आहे.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0५)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0५)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     फटाके, दारूगोळा ई. हॉल, लॉन व कंपाऊंड मध्ये वापरण्यास मनाई
                     आहे.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0६)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0६)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     तुमच्या मौल्यवान वस्तुंची पुर्ण जबाबदारी तुमच्या स्वतःची
                     राहील.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0७)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0७)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     हॉल व लॉन कार्यक्रमाच्या दिवशी संध्या. ४.०० मि. पर्यंत
                     रिकामा करून देणे बंधनकारक राहील.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0८)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0८)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     बुकींग कॅन्सल झाल्यास अॅडव्हान्स रक्कम परत मिळणार नाही.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`0९)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`0९)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     तारीख बदलल्यास किंवा रद्द केल्यास ५००० रुपये अॅडव्हान्स
                     रक्कमेतून वजा केले जातील.
                   </p>
                 </li>
 
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`१0)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`१0)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     बुकिंग करताना ५००० रुपये ठेव अनिवार्य आहे,जर नुकसान झाले तर
                     रक्कम वजा केली जाईल.
                   </p>
                 </li>
                 <li className='flex items-baseline'>
-                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`११)`}</span>
-                  <p className='text-md tracking-wider text-gray-900'>
+                  <span className='text-base tracking-wider font-semibold text-gray-500 mr-3'>{`११)`}</span>
+                  <p className='text-base tracking-wider text-gray-900'>
                     संध्याकाळचा कार्यक्रम: कार्यक्रमाच्या त्याच दिवशी दुपारी १२
                     नंतर स्वयंपाकघरात प्रवेश दिला जाईल
                   </p>
@@ -817,8 +817,8 @@ const EventView = () => {
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
-            font-size: 9.5pt !important; /* Slightly smaller base font for print */
-            line-height: 1.3 !important;
+            font-size: 10.5pt !important; /* Increased base font for print */
+            line-height: 1.4 !important;
             color: #000 !important;
             background-color: #fff !important;
             overflow: visible !important; /* Show all content */
@@ -1060,33 +1060,33 @@ const EventView = () => {
 
           /* Specific print font sizes */
           .print\\:text-2xs {
-            font-size: 0.65rem;
-            line-height: 0.9rem;
-          } /* ~8pt */
-          .print\\:text-xs {
             font-size: 0.75rem;
             line-height: 1rem;
           } /* ~9pt */
-          .print\\:text-sm {
+          .print\\:text-xs {
             font-size: 0.875rem;
             line-height: 1.25rem;
           } /* ~10.5pt */
-          .print\\:text-base {
+          .print\\:text-sm {
             font-size: 1rem;
             line-height: 1.5rem;
           } /* ~12pt */
-          .print\\:text-lg {
+          .print\\:text-base {
             font-size: 1.125rem;
             line-height: 1.75rem;
           } /* ~13.5pt */
-          .print\\:text-xl {
+          .print\\:text-lg {
             font-size: 1.25rem;
             line-height: 1.75rem;
           } /* ~15pt */
-          .print\\:text-2xl {
+          .print\\:text-xl {
             font-size: 1.5rem;
             line-height: 2rem;
           } /* ~18pt */
+          .print\\:text-2xl {
+            font-size: 1.75rem;
+            line-height: 2.25rem;
+          } /* ~21pt */
         }
       `}</style>
     </div> // --- End of main component container ---

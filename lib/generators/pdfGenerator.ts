@@ -134,17 +134,16 @@ export async function generatePDF(
           lineWidth: 0.5,
         },
         contact: {
-          halign: 'left',
+          halign: 'center',
           cellWidth: 30,
           lineColor: [0, 0, 0],
           lineWidth: 0.5,
         },
         amount: {
-          halign: 'right',
+          halign: 'center',
           cellWidth: 28,
           lineColor: [0, 0, 0],
           lineWidth: 0.5,
-          cellPadding: { right: 2 }, // Add right padding for better spacing
         },
         status: {
           halign: 'center',
@@ -179,7 +178,11 @@ export async function generatePDF(
     if (summaryY > doc.internal.pageSize.getHeight() - 80) {
       doc.addPage();
 
-      // Add summary as a table
+      // Add summary as a table (centered)
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const summaryTableWidth = 80;
+      const summaryMarginLeft = (pageWidth - summaryTableWidth) / 2;
+
       autoTable(doc, {
         body: [
           ['Summary', ''],
@@ -213,20 +216,23 @@ export async function generatePDF(
             fillColor: [240, 240, 240],
           },
           1: {
-            halign: 'right',
+            halign: 'center',
             cellWidth: 40,
-            cellPadding: { right: 2 }, // Add right padding for better spacing
           },
         },
-        margin: { left: 20 },
-        tableWidth: 80,
+        margin: { left: summaryMarginLeft },
+        tableWidth: summaryTableWidth,
       });
 
       // Add text processing note
       doc.setFontSize(9);
       doc.text(getPDFTextProcessingNote(), 20, 90);
     } else {
-      // Add summary as a table
+      // Add summary as a table (centered)
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const summaryTableWidth = 80;
+      const summaryMarginLeft = (pageWidth - summaryTableWidth) / 2;
+
       autoTable(doc, {
         body: [
           ['Summary', ''],
@@ -260,13 +266,12 @@ export async function generatePDF(
             fillColor: [240, 240, 240],
           },
           1: {
-            halign: 'right',
+            halign: 'center',
             cellWidth: 40,
-            cellPadding: { right: 2 }, // Add right padding for better spacing
           },
         },
-        margin: { left: 20 },
-        tableWidth: 80,
+        margin: { left: summaryMarginLeft },
+        tableWidth: summaryTableWidth,
       });
 
       // Add text processing note
