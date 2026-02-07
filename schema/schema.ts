@@ -31,7 +31,7 @@ export const eventSchema = z.object({
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(val);
       },
-      { message: 'Invalid email format' }
+      { message: 'Invalid email format' },
     ),
   date: z.coerce.date(),
   start_time: z
@@ -63,11 +63,11 @@ export const eventSchema = z.object({
   details: z.string().optional(),
   amount: z.preprocess(
     (val) => Number(val),
-    z.number().int().min(0).default(0)
+    z.number().int().min(0).default(0),
   ),
   advance: z.preprocess(
     (val) => Number(val),
-    z.number().int().min(0).default(0)
+    z.number().int().min(0).default(0),
   ),
   balance: z
     .number()
@@ -81,3 +81,8 @@ export const eventSchema = z.object({
 export type SignInSchema = z.infer<typeof signInSchema>;
 export type EventSchema = z.infer<typeof eventSchema>;
 export type SignUpSchema = z.infer<typeof signUpSchema>;
+
+// Type for User from database (with hashedPassword instead of password)
+export type UserFromDB = Omit<SignUpSchema, 'password'> & {
+  hashedPassword: string;
+};

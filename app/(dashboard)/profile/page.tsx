@@ -8,9 +8,22 @@ import prisma from '@/lib/db';
 const EmployeeView = async () => {
   const session = await getServerSession(authOptions);
   console.log(session);
-  const data = await prisma.user.findUnique({
+  const userData = await prisma.user.findUnique({
     where: { username: session.user.username },
   });
+
+  if (!userData) {
+    return (
+      <div className='max-w-4xl mx-auto p-6'>
+        <div className='bg-white rounded-xl shadow-lg p-8 text-center'>
+          <p className='text-gray-500'>User not found</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Type assertion after null check
+  const data = userData;
 
   const formatDate = (dateString: string | Date) => {
     if (!dateString) return 'N/A';
@@ -22,9 +35,9 @@ const EmployeeView = async () => {
     });
   };
 
-  const fullName = `${data?.firstName || ''} ${
-    data?.middleName ? data?.middleName + ' ' : ''
-  }${data?.lastName || ''}`.trim();
+  const fullName = `${data.firstName || ''} ${
+    data.middleName ? data.middleName + ' ' : ''
+  }${data.lastName || ''}`.trim();
 
   return (
     <div className='max-w-4xl mx-auto p-6'>
@@ -46,7 +59,7 @@ const EmployeeView = async () => {
             </svg>
           </div>
           <div className='ml-3'>
-            <h2 className='font-semibold text-gray-800'>{data?.username}</h2>
+            <h2 className='font-semibold text-gray-800'>{data.username}</h2>
             <p className='text-sm text-gray-500'>Profile</p>
           </div>
         </div>
@@ -60,12 +73,12 @@ const EmployeeView = async () => {
         <div className='px-8 pb-8 relative'>
           <div className='flex flex-col sm:flex-row items-center sm:items-end -mt-16 mb-6'>
             <div className='w-24 h-24 rounded-full bg-gray-100 border-4 border-white flex items-center justify-center shadow-md overflow-hidden'>
-              {data?.image ? (
+              {data.username == 'pirzade' ? (
                 <Image
-                  src={'/avatar.png'}
+                  src={'/uruj.jpg'}
                   alt={fullName}
-                  width={24}
-                  height={24}
+                  width={48}
+                  height={48}
                   className='w-full h-full object-cover'
                 />
               ) : (
@@ -77,17 +90,17 @@ const EmployeeView = async () => {
               <div className='flex items-center justify-center sm:justify-start mt-1'>
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    data?.role === 'ADMIN'
+                    data.role === 'ADMIN'
                       ? 'bg-amber-100 text-amber-800'
-                      : data?.role === 'MANAGER'
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-green-100 text-green-800'
+                      : data.role === 'MANAGER'
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-green-100 text-green-800'
                   }`}
                 >
-                  {data?.role}
+                  {data.role}
                 </span>
                 <span className='text-gray-500 text-sm ml-3'>
-                  @{data?.username}
+                  @{data.username}
                 </span>
               </div>
             </div>
@@ -110,17 +123,17 @@ const EmployeeView = async () => {
 
                 <div>
                   <p className='text-sm text-gray-500'>Username</p>
-                  <p className='font-medium'>{data?.username}</p>
+                  <p className='font-medium'>{data.username}</p>
                 </div>
 
                 <div className='flex items-center'>
                   <Phone className='text-gray-400 w-4 h-4 mr-2' />
-                  <span>{data?.contact || 'No contact information'}</span>
+                  <span>{data.contact || 'No contact information'}</span>
                 </div>
 
                 <div className='flex items-center'>
                   <Award className='text-gray-400 w-4 h-4 mr-2' />
-                  <span>{data?.role}</span>
+                  <span>{data.role}</span>
                 </div>
               </div>
             </div>
@@ -136,21 +149,21 @@ const EmployeeView = async () => {
                 <div>
                   <p className='text-sm text-gray-500'>User ID</p>
                   <p className='font-medium text-sm text-gray-700 break-all'>
-                    {data?.id}
+                    {data.id}
                   </p>
                 </div>
 
                 <div>
                   <p className='text-sm text-gray-500'>Created On</p>
                   <p className='font-medium'>
-                    {data?.createdAt ? formatDate(data.createdAt) : 'N/A'}
+                    {data.createdAt ? formatDate(data.createdAt) : 'N/A'}
                   </p>
                 </div>
 
                 <div>
                   <p className='text-sm text-gray-500'>Last Updated</p>
                   <p className='font-medium'>
-                    {data?.updatedAt ? formatDate(data.updatedAt) : 'N/A'}
+                    {data.updatedAt ? formatDate(data.updatedAt) : 'N/A'}
                   </p>
                 </div>
               </div>

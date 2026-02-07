@@ -1,17 +1,19 @@
 'use client';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
 const TableSearch = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const value = (e.currentTarget[0] as HTMLInputElement).value;
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams);
     params.set('page', '1');
     params.set('search', value);
-    router.push(`${window.location.pathname}?${params}`);
+    router.push(`${pathname}?${params}`);
   };
   return (
     <form

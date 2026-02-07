@@ -21,6 +21,15 @@ export const metadata: Metadata = {
   description: 'Developed by Girish Digge.',
 };
 
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  };
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{

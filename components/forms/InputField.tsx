@@ -54,7 +54,7 @@ const InputField = ({
           placeholder={placeholder}
           {...registerOptions}
           {...rest}
-          className={`w-full px-4 py-2.5 rounded-lg border bg-white transition-all duration-200 outline-none ${
+          className={`w-full px-4 py-3 md:py-2.5 rounded-lg border bg-white transition-all duration-200 outline-none text-base md:text-sm ${
             error
               ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100'
               : 'border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100'

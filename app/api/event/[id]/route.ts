@@ -21,12 +21,26 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
     }
 
-    return NextResponse.json(event);
+    // Convert null to undefined for optional fields to match EventSchema type
+    const mappedEvent = {
+      ...event,
+      email: event.email ?? undefined,
+      address: event.address ?? undefined,
+      details: event.details ?? undefined,
+      bookingBy: event.bookingBy ?? undefined,
+      reference: event.reference ?? undefined,
+      hallHandover: event.hallHandover ?? undefined,
+      decoration: event.decoration ?? undefined,
+      catering: event.catering ?? undefined,
+      kitchen: event.kitchen ?? undefined,
+    };
+
+    return NextResponse.json(mappedEvent);
   } catch (error) {
     console.error('Error fetching event:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

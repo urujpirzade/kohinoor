@@ -136,12 +136,12 @@ const EmployeeView = () => {
         <div className='px-8 pb-8 relative'>
           <div className='flex flex-col sm:flex-row items-center sm:items-end -mt-16 mb-6'>
             <div className='w-24 h-24 rounded-full bg-gray-100 border-4 border-white flex items-center justify-center shadow-md overflow-hidden'>
-              {data.image ? (
+              {data.username == 'pirzade' ? (
                 <Image
-                  src={'/avatar.png'}
+                  src={'/uruj.jpg'}
                   alt={fullName}
-                  width={24}
-                  height={24}
+                  width={48}
+                  height={48}
                   className='w-full h-full object-cover'
                 />
               ) : (
@@ -156,8 +156,8 @@ const EmployeeView = () => {
                     data.role === 'ADMIN'
                       ? 'bg-amber-100 text-amber-800'
                       : data.role === 'MANAGER'
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-green-100 text-green-800'
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-green-100 text-green-800'
                   }`}
                 >
                   {data.role}

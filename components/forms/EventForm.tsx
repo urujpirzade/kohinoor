@@ -63,7 +63,7 @@ const EventForm = ({
     formState: { errors, isSubmitting },
   } = useForm<
     Input, // <-- raw form-input type
-    any, // <-- resolver context (almost always `any`)
+    unknown, // <-- resolver context (almost always `any`)
     Output
   >({
     // <-- parsed/output type
@@ -118,7 +118,7 @@ const EventForm = ({
   return (
     <form
       onSubmit={onSubmitHandler}
-      className='w-full max-w-4xl bg-white shadow-xl rounded-2xl p-8 space-y-8'
+      className='form-container w-full max-w-4xl bg-white shadow-xl rounded-2xl p-4 md:p-8 space-y-6 md:space-y-8'
     >
       {/* Header */}
       <div className='border-b pb-4'>
@@ -139,7 +139,7 @@ const EventForm = ({
             Event Information
           </h2>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+        <div className='form-row grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'>
           <InputField
             label='Client name'
             name='client_name'
@@ -157,7 +157,7 @@ const EventForm = ({
             required
           />
         </div>
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-6 border-1 rounded-md p-4 border-lamaPurple'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 border-1 rounded-md p-3 md:p-4 border-lamaPurple'>
           <div className='flex items-center space-x-2'>
             <CheckField
               id='hallHandover'
@@ -207,7 +207,7 @@ const EventForm = ({
           <div className='h-6 w-1 bg-green-500 rounded-full'></div>
           <h2 className='text-xl font-semibold text-gray-700'>Date & Time</h2>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+        <div className='form-row grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'>
           <InputField
             label='Date'
             name='date'
@@ -254,7 +254,7 @@ const EventForm = ({
             Contact Information
           </h2>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+        <div className='form-row grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'>
           <InputField
             label='Email'
             name='email'
@@ -300,7 +300,7 @@ const EventForm = ({
             Financial Details
           </h2>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+        <div className='form-row grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6'>
           <InputField
             label='Total Amount'
             name='amount'
@@ -344,19 +344,19 @@ const EventForm = ({
       </div>
 
       {/* Submit Button */}
-      <div className='pt-6 border-t'>
-        <div className='flex justify-end gap-4'>
+      <div className='pt-4 md:pt-6 border-t'>
+        <div className='flex flex-col sm:flex-row justify-end gap-3 md:gap-4'>
           <button
             onClick={() => window.location.reload()}
             type='button'
-            className='px-6 py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition'
+            className='btn-mobile px-6 py-3 md:py-2.5 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition order-2 sm:order-1'
           >
             Cancel
           </button>
           <button
             type='submit'
             disabled={isSubmitting}
-            className='px-8 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2'
+            className='btn-mobile px-8 py-3 md:py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 order-1 sm:order-2'
           >
             {isSubmitting && (
               <svg

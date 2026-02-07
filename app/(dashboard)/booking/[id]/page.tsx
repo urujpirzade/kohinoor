@@ -31,8 +31,8 @@ function ModernEventSnapshot({
     weekday: 'long',
   });
 
-  // const startTime = data.start_time ? formatTime12hr(data.start_time) : '-';
-  // const endTime = data.end_time ? formatTime12hr(data.end_time) : '-';
+  const startTime = data.start_time ? formatTime12hr(data.start_time) : '-';
+  const endTime = data.end_time ? formatTime12hr(data.end_time) : '-';
 
   // Format payment data
   const totalAmount = formatCurrency(data.amount);
@@ -43,25 +43,33 @@ function ModernEventSnapshot({
   const percentPaid = Math.round((data.advance / data.amount) * 100);
   const hall =
     data.hall === 'mainHall' ? 'Main Hall' : 'Open Party Hall (Hall No.2)';
+
   return (
     <div className='bg-white rounded-2xl overflow-hidden border border-gray-100  '>
       {/* Event Type Banner - Improved with more elegant gradient */}
-      <div className='bg-[#f9fafb] border border-[#d1d5db] p-3 rounded-md ml-4 mr-4'>
-        <div className='flex justify-between items-start'>
-          <div>
-            <h3 className='text-lg font-semibold text-[#1f2937]'>
+      <div className='bg-[#f9fafb] border border-[#d1d5db] p-3 rounded-md ml-4 mr-4 print:bg-gray-50 print:border-gray-300 print:p-2 print:ml-0 print:mr-0'>
+        <div className='flex justify-between items-start  print:gap-2'>
+          <div className='print:w-full'>
+            <h3 className='text-lg font-semibold text-[#1f2937] print:text-base '>
               {data.event_name || 'Event'}
             </h3>
             <div>
-              <p className='text-2xl font-bold text-purple-700'>{eventDate}</p>
-              <p className='text-lg text-gray-600 font-medium tracking-wide'>
-                {weekday}
+              <p className='text-2xl font-bold text-purple-700 print:text-xl'>
+                {eventDate}
               </p>
+              <div className='flex items-center gap-2 print:gap-1'>
+                <p className='text-lg text-gray-600 font-medium tracking-wide print:text-sm '>
+                  {weekday}:
+                </p>
+                <p className='text-sm text-purple-700 font-medium tracking-wide print:text-xs '>
+                  {startTime} to {endTime}
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className='flex items-center gap-2 bg-[#e0e7ff] text-[#3730a3] font-medium px-3 py-1 rounded-md border border-[#c7d2fe] text-xl'>
-            <span className='w-2 h-2 rounded-full bg-[#4ade80]'></span>
+          <div className='flex items-center gap-2 bg-[#e0e7ff] text-[#3730a3] font-medium px-3 py-1 rounded-md border border-[#c7d2fe] text-xl print:bg-gray-100 print:border-gray-400 print:text-base print:px-2 print:py-1  print:self-start'>
+            <span className='w-2 h-2 rounded-full bg-[#4ade80] '></span>
             {hall}
           </div>
         </div>
@@ -193,6 +201,9 @@ function ModernEventSnapshot({
               )}
 
               <li> {data.details || 'No additional details provided.'}</li>
+              {/* <li>
+                {`evening program: kitchen access will be provided on the same day of the event after 12 PM`}
+              </li> */}
             </ul>
           </div>
         </div>
@@ -297,7 +308,7 @@ const EventView = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [id, session?.user?.role]);
 
   if (loading) {
     return (
@@ -518,13 +529,13 @@ const EventView = () => {
               <div className='mt-2 flex flex-row gap-8 space-x-4'>
                 {/* Payment QR */}
                 <div className='flex flex-col items-center'>
-                  <div className='bg-gradient-to-br from-gray-100 to-gray-50 h-16 w-16 flex items-center justify-center rounded-lg border border-gray-200  print:bg-gray-100'>
+                  <div className='bg-gradient-to-br from-gray-100 to-gray-50 h-16 w-16 flex items-center justify-center rounded-lg border border-gray-200  print:bg-gray-100 print:items-start'>
                     <Image
-                      src='/pay.png'
+                      src='/pay2.png'
                       alt='Payment'
                       width={48}
-                      height={32}
-                      className='h-14 w-14 print:h-12 print:w-12'
+                      height={48}
+                      className=' h-14 w-14 print:h-12 print:w-12'
                     />
                   </div>
                   <Image
@@ -618,7 +629,7 @@ const EventView = () => {
               </span>
             </div>
           </div>
-          <div className='hidden print:block bg-white rounded-lg  shadow-lg shadow-gray-400 border border-gray-100 overflow-hidden'>
+          <div className='hidden print:block print:page-break-before-always bg-white rounded-lg shadow-lg shadow-gray-400 border border-gray-100 overflow-hidden'>
             {/* Header */}
             <div className='bg-gradient-to-r from-yellow-100 via-orange-100 to-amber-100 text-amber-900 p-3'>
               <h4 className='font-semibold flex items-center text-lg'>
@@ -715,6 +726,13 @@ const EventView = () => {
                     रक्कम वजा केली जाईल.
                   </p>
                 </li>
+                <li className='flex items-baseline'>
+                  <span className='text-md tracking-wider font-semibold text-gray-500 mr-3'>{`११)`}</span>
+                  <p className='text-md tracking-wider text-gray-900'>
+                    संध्याकाळचा कार्यक्रम: कार्यक्रमाच्या त्याच दिवशी दुपारी १२
+                    नंतर स्वयंपाकघरात प्रवेश दिला जाईल
+                  </p>
+                </li>
               </ol>
             </div>
           </div>
@@ -757,7 +775,7 @@ const EventView = () => {
         @media print {
           @page {
             size: A4 portrait; /* Set to standard A4 paper size */
-            margin: 1cm; /* Standard margin for printer safety */
+            margin: 0.5cm; /* Reduced margin for more content space */
           }
 
           body {
@@ -776,20 +794,26 @@ const EventView = () => {
             visibility: hidden;
           }
 
-          /* Make the receipt container and its children visible */
+          /* Make only the receipt container and its children visible */
           #receipt-content,
           #receipt-content * {
-            visibility: visible;
+            visibility: visible !important;
+          }
+
+          /* Hide elements marked with print:hidden */
+          .print\\:hidden {
+            display: none !important;
           }
 
           /* Style the main receipt container for printing */
           #receipt-content {
-            position: absolute;
+            position: relative;
             left: 0;
             top: 0;
             width: 100%;
             height: auto; /* Allow content to flow */
             margin: 0 !important;
+            padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
             border-radius: 0 !important;
@@ -825,18 +849,151 @@ const EventView = () => {
             padding: 0 !important; /* Remove extra padding for print */
           }
 
+          /* Remove horizontal padding to fix left margin issue */
+          .p-4,
+          .p-6,
+          .p-8,
+          .px-4,
+          .px-6,
+          .px-8 {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+
+          /* Fix QR code containers */
+          #receipt-content img {
+            max-width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+          }
+
+          /* Fix QR code parent containers */
+          #receipt-content .flex.flex-row,
+          #receipt-content .flex.flex-col {
+            flex-shrink: 0 !important;
+            width: auto !important;
+            max-width: none !important;
+          }
+
+          /* Fix hall name container stretching */
+          #receipt-content .flex.items-center.gap-2,
+          #receipt-content .bg-\\[\\#e0e7ff\\] {
+            flex-shrink: 0 !important;
+            width: auto !important;
+            max-width: fit-content !important;
+            white-space: nowrap !important;
+          }
+
+          /* Fix specific component spacing and layout issues */
+
+          /* QR code container - keep it compact */
+          #receipt-content .flex.flex-row.gap-8 {
+            gap: 1rem !important;
+          }
+
+          /* Hall name container - don't let it take full space */
+          #receipt-content .flex.items-center.gap-2.bg-\\[\\#e0e7ff\\] {
+            width: auto !important;
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+          }
+
+          /* Contact and address component - add proper margins */
+          #receipt-content .bg-gradient-to-r.from-indigo-50 {
+            margin-left: 1rem !important;
+            margin-right: 1rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+          }
+
+          /* Services included component - add proper margins */
+          #receipt-content .bg-gradient-to-br.from-indigo-50 {
+            margin-left: 1rem !important;
+            margin-right: 1rem !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+          }
+
+          /* Rules and regulations - improve spacing */
+          #receipt-content .space-y-3 > * + * {
+            margin-top: 0.75rem !important;
+          }
+
+          #receipt-content ol.space-y-3 li {
+            margin-bottom: 0.75rem !important;
+          }
+
+          /* Simple page break only for rules */
+          .hidden.print\\:block {
+            display: block !important;
+            page-break-before: always !important;
+          }
+
+          /* Basic page setup */
+          @page {
+            size: A4 portrait;
+            margin: 0.5cm;
+          }
+
+          /* Let global CSS handle the positioning */
+          #receipt-content {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+
+          /* Aggressively hide all dashboard layout elements */
+          .h-screen > div:first-child,
+          .sidebar-mobile,
+          .sidebar-overlay,
+          nav,
+          .bg-white.z-50 {
+            display: none !important;
+            visibility: hidden !important;
+          }
+
+          /* Hide sidebar by targeting common sidebar classes */
+          .w-\\[14\\%\\],
+          .w-\\[8\\%\\],
+          .w-\\[16\\%\\],
+          .xl\\:w-\\[14\\%\\],
+          .lg\\:w-\\[16\\%\\],
+          .md\\:w-\\[8\\%\\] {
+            display: none !important;
+            visibility: hidden !important;
+          }
+
+          /* Reset all parent containers to use full width */
+          body,
+          html,
+          #__next,
+          #__next > div,
+          .h-screen,
+          .flex,
+          .w-full,
+          .max-w-4xl {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
+          }
+
+          /* Specifically target the main container that has the max-width constraint */
+          .w-full.max-w-4xl.mx-auto {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+          }
+
           /* Hide elements marked with print:hidden */
           .print\\:hidden {
             display: none !important;
           }
 
-          /* Optimize page breaks */
-          div,
-          section {
-            /* Apply broadly but carefully */
-            page-break-inside: avoid;
-          }
-
+          /* Only prevent page breaks where necessary */
           h1,
           h2,
           h3,
@@ -844,10 +1001,6 @@ const EventView = () => {
           h5,
           h6 {
             page-break-after: avoid;
-            page-break-inside: avoid;
-          }
-          ul,
-          ol {
             page-break-inside: avoid;
           }
 

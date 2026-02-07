@@ -38,7 +38,7 @@ const FormModal = ({
   table: 'booking' | 'employee';
   type: 'create' | 'update' | 'delete';
   data?: any;
-  id?: any;
+  id?: string | number;
 }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -99,9 +99,13 @@ const FormModal = ({
             <button
               className='flex-1 py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700'
               type='submit'
-              onClick={() =>
-                table === 'booking' ? handleDelete(id) : handleUserDelete(id)
-              }
+              onClick={() => {
+                if (table === 'booking' && typeof id === 'number') {
+                  handleDelete(id);
+                } else if (table === 'employee' && typeof id === 'string') {
+                  handleUserDelete(id);
+                }
+              }}
             >
               Yes, Delete
             </button>
@@ -153,22 +157,22 @@ const FormModal = ({
       )}
 
       {open && (
-        <div className='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity'>
+        <div className='fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 md:p-4 transition-opacity'>
           <div
             className='bg-white rounded-2xl relative max-h-[90vh] w-full md:w-[70%] lg:w-[60%] overflow-auto animate-slideIn shadow-2xl'
             style={{ animation: 'slideIn 0.3s ease-out' }}
           >
-            <div className='sticky top-0 right-0 pt-4 pr-4 flex justify-end z-10'>
+            <div className='sticky top-0 right-0 pt-4 pr-4 flex justify-end z-10 bg-white rounded-t-2xl'>
               <button
                 onClick={() => setOpen(false)}
-                className='bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors'
+                className='bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors btn-mobile'
                 aria-label='Close modal'
               >
                 <Image src='/close.png' alt='close' height={14} width={14} />
               </button>
             </div>
 
-            <div className='px-1 pb-6'>
+            <div className='modal-content px-2 md:px-4 pb-6'>
               <Form />
             </div>
           </div>
